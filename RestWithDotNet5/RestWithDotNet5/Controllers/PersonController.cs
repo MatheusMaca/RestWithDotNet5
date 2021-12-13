@@ -38,7 +38,6 @@ namespace RestWithDotNet5.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Person person)
         {
-            
             if (person == null)
                 return BadRequest();
 
