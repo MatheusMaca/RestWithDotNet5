@@ -42,7 +42,7 @@ namespace RestWithDotNet5.Services.Implementations
                 FirstName = "Pedro",
                 LastName = "Nagano",
                 Gender = "Masculino",
-                Addres = "R. Rosa 622"
+                Address = "R. Rosa 622"
             };
         }
 
@@ -54,7 +54,7 @@ namespace RestWithDotNet5.Services.Implementations
                 FirstName = "Person Name" + i,
                 LastName = "Person Last Name" + i,
                 Gender = "Male",
-                Addres = "Some addres" + i
+                Address = "Some addres" + i
             };
         }
 

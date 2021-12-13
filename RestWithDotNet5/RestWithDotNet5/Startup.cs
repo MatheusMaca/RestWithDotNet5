@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using RestWithDotNet5.Model.Context;
 using RestWithDotNet5.Services.Implementations;
 
 namespace RestWithDotNet5
@@ -21,6 +23,8 @@ namespace RestWithDotNet5
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            var connection = Configuration["MySQLConnection:MySQLConnectionString"];
+            services.AddDbContext<MySqlContext>(options => options.UseMySql(connection));
             services.AddScoped<IPersonService, PersonService>();
             services.AddSwaggerGen(c =>
             {
