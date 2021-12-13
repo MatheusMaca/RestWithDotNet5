@@ -10,7 +10,6 @@ namespace RestWithDotNet5.Controllers
     [Route("[controller]")]
     public class CalculatorController : ControllerBase
     {
-
         private readonly ILogger<CalculatorController> _logger;
 
         public CalculatorController(ILogger<CalculatorController> logger)
