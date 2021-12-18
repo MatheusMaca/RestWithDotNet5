@@ -24,8 +24,15 @@ namespace RestWithDotNet5
         {
             services.AddControllers();
             var connection = Configuration["MySQLConnection:MySQLConnectionString"];
+            
+            //Versioning API -> Isto deve ser feito quando uma api estiver sendo usada e precisa ser alterada para outros consumidores  
+            services.AddApiVersioning();
+
             services.AddDbContext<MySqlContext>(options => options.UseMySql(connection));
+            
+            //Injeção de dependencia
             services.AddScoped<IPersonService, PersonService>();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Documentação Swagger API", Version = "v1" });
