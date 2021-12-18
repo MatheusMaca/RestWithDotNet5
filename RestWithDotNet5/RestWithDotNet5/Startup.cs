@@ -5,8 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using RestWithDotNet5.Busines.Implementations;
 using RestWithDotNet5.Model.Context;
-using RestWithDotNet5.Services.Implementations;
+using RestWithDotNet5.Repository.Implementations;
 
 namespace RestWithDotNet5
 {
@@ -31,7 +32,8 @@ namespace RestWithDotNet5
             services.AddDbContext<MySqlContext>(options => options.UseMySql(connection));
             
             //Injeção de dependencia
-            services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IPersonBusines, PersonBusines>();
+            services.AddScoped<IPersonRepository, PersonRepostory>();
             
             services.AddSwaggerGen(c =>
             {

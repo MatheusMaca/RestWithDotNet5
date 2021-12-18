@@ -1,9 +1,9 @@
 ﻿using RestWithDotNet5.Model;
 using System.Collections.Generic;
 
-namespace RestWithDotNet5.Services.Implementations
+namespace RestWithDotNet5.Busines.Implementations
 {
-    public interface IPersonService
+    public interface IPersonBusines 
     {
         Person Create(Person person);
         Person Update(Person person);

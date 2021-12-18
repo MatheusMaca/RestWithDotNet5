@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RestWithDotNet5.Model;
-using RestWithDotNet5.Services.Implementations;
+using RestWithDotNet5.Busines.Implementations;
+using System;
 
 namespace RestWithDotNet5.Controllers
 {
@@ -11,24 +12,25 @@ namespace RestWithDotNet5.Controllers
     public class PersonController : ControllerBase
     {
         private readonly ILogger<CalculatorController> _logger;
-        private readonly IPersonService _personService;
+        private readonly IPersonBusines _personBusines;
 
-        public PersonController(ILogger<CalculatorController> logger, IPersonService personService)
+        public PersonController(ILogger<CalculatorController> logger, IPersonBusines personBusines)
         {
-            _personService = personService;
+            _personBusines = personBusines;
             _logger = logger;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_personService.FindAll());
+            _logger.LogInformation($"Requisição registrada em {DateTimeOffset.UtcNow}");
+            return Ok(_personBusines.FindAll());
         }
         
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
-            var person = _personService.FindById(id);
+            var person = _personBusines.FindById(id);
 
             if (person == null)
                 return NotFound();
@@ -42,7 +44,7 @@ namespace RestWithDotNet5.Controllers
             if (person == null)
                 return BadRequest();
 
-            return Ok(_personService.Create(person));
+            return Ok(_personBusines.Create(person));
         }
 
         [HttpPut]
@@ -52,13 +54,13 @@ namespace RestWithDotNet5.Controllers
             if (person == null)
                 return BadRequest();
 
-            return Ok(_personService.Update(person));
+            return Ok(_personBusines.Update(person));
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            _personService.Delete(id);
+            _personBusines.Delete(id);
             return NoContent();
         }
     }

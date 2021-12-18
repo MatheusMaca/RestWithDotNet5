@@ -4,13 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RestWithDotNet5.Services.Implementations
+namespace RestWithDotNet5.Repository.Implementations
 {
-    public class PersonService : IPersonService
+    public class PersonRepostory : IPersonRepository
     {
+
         private readonly MySqlContext _context;
 
-        public PersonService(MySqlContext context)
+        public PersonRepostory(MySqlContext context)
         {
             _context = context;
         }
@@ -80,9 +81,10 @@ namespace RestWithDotNet5.Services.Implementations
             }
         }
 
-        private bool Exists(long id)
+        public bool Exists(long id)
         {
             return _context.Persons.Any(p => p.Id.Equals(id));
         }
+
     }
 }
