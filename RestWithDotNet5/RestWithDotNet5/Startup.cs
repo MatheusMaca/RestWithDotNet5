@@ -8,16 +8,26 @@ using Microsoft.OpenApi.Models;
 using RestWithDotNet5.Busines.Implementations;
 using RestWithDotNet5.Model.Context;
 using RestWithDotNet5.Repository.Implementations;
+using Serilog;
+using System;
+using System.Collections.Generic;
 
 namespace RestWithDotNet5
 {
     public class Startup
     {
+        public IWebHostEnvironment Environment { get; }
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
+
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo
+                .Console()
+                .CreateLogger();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -25,7 +35,12 @@ namespace RestWithDotNet5
         {
             services.AddControllers();
             var connection = Configuration["MySQLConnection:MySQLConnectionString"];
-            
+
+            if (Environment.IsDevelopment())
+            {
+                MigrateDatabase(connection);
+            }
+
             //Versioning API -> Isto deve ser feito quando uma api estiver sendo usada e precisa ser alterada para outros consumidores  
             services.AddApiVersioning();
 
@@ -61,6 +76,25 @@ namespace RestWithDotNet5
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void MigrateDatabase(string connection)
+        {
+            try
+            {
+                var evolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connection);
+                var evolve = new Evolve.Evolve(evolveConnection, msg => Log.Information(msg)) 
+                { 
+                    Locations = new List<string> {"db/migrations", "db/dataset" },
+                    IsEraseDisabled = true
+                };
+                evolve.Migrate();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Database migration failed!", ex);
+                throw;
+            }
         }
     }
 }
