@@ -2,7 +2,7 @@
 
 namespace RestWithDotNet5.Model
 {
-    [Table("person")]
+    [Table("persons")]
     public class Person
     {
         [Column("id")]

@@ -1,4 +1,4 @@
-﻿INSERT INTO `rest_asp_net_udemy`.`person`
+﻿INSERT INTO `rest_asp_net_udemy`.`persons`
 (`id`,
 `first_name`,
 `last_name`,
