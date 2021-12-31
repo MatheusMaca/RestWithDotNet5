@@ -11,10 +11,10 @@ namespace RestWithDotNet5.Controllers
     [Route("api/[controller]/v{version:apiVersion}")]
     public class PersonController : ControllerBase
     {
-        private readonly ILogger<CalculatorController> _logger;
+        private readonly ILogger<PersonController> _logger;
         private readonly IPersonBusines _personBusines;
 
-        public PersonController(ILogger<CalculatorController> logger, IPersonBusines personBusines)
+        public PersonController(ILogger<PersonController> logger, IPersonBusines personBusines)
         {
             _personBusines = personBusines;
             _logger = logger;

@@ -7,7 +7,7 @@ namespace RestWithDotNet5.Model
     public class Book
     {
         [Column("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Column("title")]
         public string Title { get; set; }

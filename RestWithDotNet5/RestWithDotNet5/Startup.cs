@@ -48,8 +48,11 @@ namespace RestWithDotNet5
             
             //Injeção de dependencia
             services.AddScoped<IPersonBusines, PersonBusines>();
-            services.AddScoped<IPersonRepository, PersonRepostory>();
-            
+            services.AddScoped<IBookBusines, BookBusines>();
+
+            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IBookRepository, BookRepository>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Documentação Swagger API", Version = "v1" });

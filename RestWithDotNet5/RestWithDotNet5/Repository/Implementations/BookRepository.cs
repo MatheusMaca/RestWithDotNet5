@@ -6,31 +6,20 @@ using System.Linq;
 
 namespace RestWithDotNet5.Repository.Implementations
 {
-    public class PersonRepository : IPersonRepository
+    public class BookRepository : IBookRepository
     {
-
         private readonly MySqlContext _context;
 
-        public PersonRepository(MySqlContext context)
+        public BookRepository(MySqlContext context)
         {
             _context = context;
         }
 
-        public List<Person> FindAll()
-        {
-            return _context.Persons.ToList();
-        }
-
-        public Person FindById(long id)
-        {
-            return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
-        }
-
-        public Person Create(Person person)
+        public Book Create(Book book)
         {
             try
             {
-                _context.Add(person);
+                _context.Add(book);
                 _context.SaveChanges();
             }
             catch (Exception)
@@ -38,40 +27,18 @@ namespace RestWithDotNet5.Repository.Implementations
                 throw;
             }
 
-            return person;
-        }
-
-        public Person Update(Person person)
-        {
-            if (!Exists(person.Id))
-                return null;
-
-            var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
-
-            if (result != null)
-            {
-                try
-                {
-                    _context.Entry(result).CurrentValues.SetValues(person);
-                    _context.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-            return person;
+            return book;
         }
 
         public void Delete(long id)
         {
-            var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
+            var result = _context.Books.SingleOrDefault(b => b.Id.Equals(id));
 
             if (result != null)
             {
                 try
                 {
-                    _context.Persons.Remove(result);
+                    _context.Books.Remove(result);
                     _context.SaveChanges();
                 }
                 catch (Exception)
@@ -83,8 +50,40 @@ namespace RestWithDotNet5.Repository.Implementations
 
         public bool Exists(long id)
         {
-            return _context.Persons.Any(p => p.Id.Equals(id));
+            return _context.Books.Any(b => b.Id.Equals(id));
         }
 
+        public List<Book> FindAll()
+        {
+            return _context.Books.ToList();
+        }
+
+        public Book FindById(long id)
+        {
+            return _context.Books.SingleOrDefault(b => b.Id.Equals(id));
+        }
+
+        public Book Update(Book book)
+        {
+            if (!Exists(book.Id))
+                return null;
+
+            var result = _context.Books.SingleOrDefault(b => b.Id.Equals(book.Id));
+
+            if (result != null)
+            {
+                try
+                {
+                    _context.Entry(result).CurrentValues.SetValues(book);
+                    _context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+
+            return book;
+        }
     }
 }
