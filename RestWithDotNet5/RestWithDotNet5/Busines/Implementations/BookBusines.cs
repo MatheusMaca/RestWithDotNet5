@@ -6,9 +6,9 @@ namespace RestWithDotNet5.Busines.Implementations
 {
     public class BookBusines : IBookBusines
     {
-        private readonly IBookRepository _repository;
+        private readonly IRepository<Book> _repository;
 
-        public BookBusines(IBookRepository repository)
+        public BookBusines(IRepository<Book> repository)
         {
             _repository = repository;
         }

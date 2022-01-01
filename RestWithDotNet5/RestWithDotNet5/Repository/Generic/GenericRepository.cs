@@ -10,8 +10,8 @@ namespace RestWithDotNet5.Repository.Generic
 {
     public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
-        private MySqlContext _context;
-        private DbSet<T> dataSet;
+        private readonly MySqlContext _context;
+        private readonly DbSet<T> dataSet;
 
         public GenericRepository(MySqlContext context)
         {

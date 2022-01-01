@@ -6,9 +6,9 @@ namespace RestWithDotNet5.Busines.Implementations
 {
     public class PersonBusines : IPersonBusines
     {
-        private readonly IPersonRepository _repository; 
+        private readonly IRepository<Person> _repository; 
 
-        public PersonBusines(IPersonRepository repository)
+        public PersonBusines(IRepository<Person> repository)
         {
             _repository = repository;
         }

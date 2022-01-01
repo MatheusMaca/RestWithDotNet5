@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RestWithDotNet5.Busines.Implementations;
 using RestWithDotNet5.Model.Context;
+using RestWithDotNet5.Repository.Generic;
 using RestWithDotNet5.Repository.Implementations;
 using Serilog;
 using System;
@@ -50,8 +51,8 @@ namespace RestWithDotNet5
             services.AddScoped<IPersonBusines, PersonBusines>();
             services.AddScoped<IBookBusines, BookBusines>();
 
-            services.AddScoped<IPersonRepository, PersonRepository>();
-            services.AddScoped<IBookRepository, BookRepository>();
+            //Injeção de dependencia repositorio generico
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
             services.AddSwaggerGen(c =>
             {
