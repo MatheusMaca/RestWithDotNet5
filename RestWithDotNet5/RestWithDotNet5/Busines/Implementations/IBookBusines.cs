@@ -1,14 +1,14 @@
-﻿using RestWithDotNet5.Model;
+﻿using RestWithDotNet5.Data.VO;
 using System.Collections.Generic;
 
 namespace RestWithDotNet5.Busines.Implementations
 {
     public interface IBookBusines
     {
-        Book Create(Book book);
-        Book Update(Book book);
-        List<Book> FindAll();
-        Book FindById(long id);
+        BookVO Create(BookVO book);
+        BookVO Update(BookVO book);
+        List<BookVO> FindAll();
+        BookVO FindById(long id);
         void Delete(long id);
     }
 }

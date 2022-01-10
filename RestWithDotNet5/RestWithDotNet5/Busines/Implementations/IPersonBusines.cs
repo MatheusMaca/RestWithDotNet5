@@ -1,14 +1,14 @@
-﻿using RestWithDotNet5.Model;
+﻿using RestWithDotNet5.Data.VO;
 using System.Collections.Generic;
 
 namespace RestWithDotNet5.Busines.Implementations
 {
     public interface IPersonBusines 
     {
-        Person Create(Person person);
-        Person Update(Person person);
-        List<Person> FindAll();
-        Person FindById(long id);
+        PersonVO Create(PersonVO person);
+        PersonVO Update(PersonVO person);
+        List<PersonVO> FindAll();
+        PersonVO FindById(long id);
         void Delete(long id);
     }
 }
