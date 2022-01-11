@@ -12,6 +12,7 @@ using RestWithDotNet5.Repository.Implementations;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 
 namespace RestWithDotNet5
 {
@@ -41,6 +42,13 @@ namespace RestWithDotNet5
             {
                 MigrateDatabase(connection);
             }
+
+            services.AddMvc(options => 
+            {
+                options.RespectBrowserAcceptHeader = true;
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml").ToString());
+                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json").ToString());
+            }).AddXmlSerializerFormatters();
 
             //Versioning API -> Isto deve ser feito quando uma api estiver sendo usada e precisa ser alterada para outros consumidores  
             services.AddApiVersioning();
