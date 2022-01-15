@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RestWithDotNet5.Busines.Implementations;
+using RestWithDotNet5.Hypermedia.Enricher;
+using RestWithDotNet5.Hypermedia.Filters;
 using RestWithDotNet5.Model.Context;
 using RestWithDotNet5.Repository.Generic;
 using RestWithDotNet5.Repository.Implementations;
@@ -50,6 +52,12 @@ namespace RestWithDotNet5
                 options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json").ToString());
             }).AddXmlSerializerFormatters();
 
+            //Hateoas
+            var filterOptions = new HyperMediaFilterOptions(); 
+            filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+            filterOptions.ContentResponseEnricherList.Add(new BookEnricher());
+            services.AddSingleton(filterOptions);
+
             //Versioning API -> Isto deve ser feito quando uma api estiver sendo usada e precisa ser alterada para outros consumidores  
             services.AddApiVersioning();
 
@@ -87,6 +95,7 @@ namespace RestWithDotNet5
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapControllerRoute("DefaultApi", "{controller=values}/{id?}");
             });
         }
 

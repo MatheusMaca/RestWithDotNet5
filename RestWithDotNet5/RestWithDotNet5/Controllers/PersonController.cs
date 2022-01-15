@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using RestWithDotNet5.Busines.Implementations;
 using System;
 using RestWithDotNet5.Data.VO;
+using RestWithDotNet5.Hypermedia.Filters;
 
 namespace RestWithDotNet5.Controllers
 {
@@ -21,6 +22,7 @@ namespace RestWithDotNet5.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             _logger.LogInformation($"Requisição registrada em {DateTimeOffset.UtcNow}");
@@ -28,6 +30,7 @@ namespace RestWithDotNet5.Controllers
         }
         
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
             var person = _personBusines.FindById(id);
@@ -39,6 +42,7 @@ namespace RestWithDotNet5.Controllers
         }
         
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null)
@@ -48,6 +52,7 @@ namespace RestWithDotNet5.Controllers
         }
 
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
 

@@ -1,6 +1,10 @@
-﻿namespace RestWithDotNet5.Data.VO
+﻿using RestWithDotNet5.Hypermedia;
+using RestWithDotNet5.Hypermedia.Abstract;
+using System.Collections.Generic;
+
+namespace RestWithDotNet5.Data.VO
 {
-    public class PersonVO
+    public class PersonVO : ISupportsHyperMedia
     {
         //[JsonPropertyName("code")]
         public long Id { get; set; }
@@ -13,5 +17,7 @@
 
         //[JsonIgnore()]
         public string Address { get; set; }
+
+        public List<HyperMediaLink> Links { get; set; } = new List<HyperMediaLink>();
     }
 }
