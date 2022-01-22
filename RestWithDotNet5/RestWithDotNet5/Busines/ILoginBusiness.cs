@@ -6,5 +6,6 @@ namespace RestWithDotNet5.Busines
     {
         TokenVO ValidateCredentials(UserVO user);
         TokenVO ValidateCredentials(TokenVO token);
+        bool RevokeToken(string userName);
     }
 }
