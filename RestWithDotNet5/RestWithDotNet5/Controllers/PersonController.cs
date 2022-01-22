@@ -5,11 +5,13 @@ using System;
 using RestWithDotNet5.Data.VO;
 using RestWithDotNet5.Hypermedia.Filters;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RestWithDotNet5.Controllers
 {
     [ApiVersion("1")]
     [ApiController]
+    [Authorize("Bearer")]
     [Route("api/[controller]/v{version:apiVersion}")]
     public class PersonController : ControllerBase
     {
