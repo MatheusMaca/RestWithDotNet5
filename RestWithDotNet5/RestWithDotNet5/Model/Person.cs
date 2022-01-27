@@ -17,5 +17,8 @@ namespace RestWithDotNet5.Model
         
         [Column("address")]
         public string Address { get; set; }
+        
+        [Column("enabled")]
+        public bool Enabled { get; set; }
     }
 }

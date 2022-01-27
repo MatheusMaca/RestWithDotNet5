@@ -118,10 +118,11 @@ namespace RestWithDotNet5
             //Injeção de dependencia
             services.AddScoped<IPersonBusines, PersonBusines>();
             services.AddScoped<IBookBusines, BookBusines>();
-            services.AddTransient<ILoginBusiness, LoginBusiness>();
+            services.AddScoped<ILoginBusiness, LoginBusiness>();
 
             services.AddTransient<ITokenService, TokenService>();
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
 
             //Injeção de dependencia repositorio generico
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));

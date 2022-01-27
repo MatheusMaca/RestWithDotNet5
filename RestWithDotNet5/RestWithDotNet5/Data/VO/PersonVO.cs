@@ -18,6 +18,8 @@ namespace RestWithDotNet5.Data.VO
         //[JsonIgnore()]
         public string Address { get; set; }
 
+        public bool Enabled { get; set; }
+        
         public List<HyperMediaLink> Links { get; set; } = new List<HyperMediaLink>();
     }
 }
