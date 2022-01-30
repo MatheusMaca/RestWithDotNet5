@@ -9,6 +9,7 @@ namespace RestWithDotNet5.Busines.Implementations
         PersonVO Update(PersonVO person);
         List<PersonVO> FindAll();
         PersonVO FindById(long id);
+        List<PersonVO> FindByName(string firstName, string lastName);
         PersonVO Disabled(long id);
         void Delete(long id);
     }

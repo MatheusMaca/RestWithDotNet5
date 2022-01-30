@@ -52,6 +52,22 @@ namespace RestWithDotNet5.Controllers
             return Ok(person);
         }
         
+        [HttpGet("findPersonByName")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Get([FromQuery] string firstName,[FromQuery] string lastName)
+        {
+            var persons = _personBusines.FindByName(firstName, lastName);
+
+            if (persons.Count == 0)
+                return NotFound();
+
+            return Ok(persons);
+        }
+        
         [HttpPost]
         [ProducesResponseType((200), Type = typeof(PersonVO))]
         [ProducesResponseType(400)]
