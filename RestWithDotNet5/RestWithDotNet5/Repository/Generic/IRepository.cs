@@ -11,5 +11,7 @@ namespace RestWithDotNet5.Repository.Implementations
         T FindById(long id);
         void Delete(long id);
         bool Exists(long id);
+        List<T> FindWithPagedSearch(string query);
+        int GetCount(string query);
     }
 }
