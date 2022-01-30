@@ -24,16 +24,15 @@ namespace RestWithDotNet5.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("{sortDirection}/{pageSize}/{page}")]
         [ProducesResponseType((200), Type = typeof(List<PersonVO>))]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] string name, string sortDirection, int pageSize, int page)
         {
-            _logger.LogInformation($"Requisição registrada em {DateTimeOffset.UtcNow}");
-            return Ok(_personBusines.FindAll());
+            return Ok(_personBusines.FindWithPagedSearch(name, sortDirection, pageSize, page));
         }
         
         [HttpGet("{id}")]

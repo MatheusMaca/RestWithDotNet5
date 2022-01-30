@@ -24,24 +24,24 @@ namespace RestWithDotNet5.Busines.Implementations
 
         public PagedSearchVO<PersonVO> FindWithPagedSearch(string name, string sortDirection, int pageSize, int page)
         {
-            var offset = page > 0 ? (page - 1) * pageSize : 0;
             var sort = (!string.IsNullOrWhiteSpace(sortDirection)) && !sortDirection.Equals("desc") ? "asc" : "desc";
-            var size = (pageSize < 1) ? 1 : pageSize;
+            var size = (pageSize < 1) ? 10 : pageSize;
+            var offset = page > 0 ? (page - 1) * size : 0;
 
-            string query = @"SELECT * FROM PERSON P WHERE 1 = 1";
+            string query = @"select * from persons p where 1 = 1 ";
             if (!string.IsNullOrWhiteSpace(name))
-                query = query + $"AND P.NAME LIKE '%{name}%'";
-            query += $"ORDER BY P.FIRSTNAME {sort} limit {size} offset {offset}";
-                                
-            var countQuery = @"SELECT COUNT(*) FROM PERSON P WHERE 1 = 1";
+                query = query + $"and p.first_name like '%{name}%'";
+            query += $"order by p.first_name {sort} limit {size} offset {offset}";
+
+            var countQuery = @"select count(*) from persons p where 1 = 1 ";
             if (!string.IsNullOrWhiteSpace(name))
-                countQuery = countQuery + $"AND P.NAME LIKE '%{name}%'";
+                countQuery = countQuery + $"and p.first_name like '%{name}%'";
 
             var persons = _repository.FindWithPagedSearch(query);
             int totalResults = _repository.GetCount(countQuery);
 
             return new PagedSearchVO<PersonVO> {
-                CurrentPage = offset,
+                CurrentPage = page,
                 List = _converter.Parse(persons),
                 PageSize = size,
                 SortDirection = sort,
