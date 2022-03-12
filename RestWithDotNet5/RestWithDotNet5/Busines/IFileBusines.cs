@@ -9,6 +9,6 @@ namespace RestWithDotNet5.Busines
     {
         public byte[] GetFile(string fileName);
         public Task<FileDetailVO> SaveFileToDisk(IFormFile file);
-        public List<FileDetailVO> SaveFilesToDisk(IList<IFormFile> files);
+        public Task<List<FileDetailVO>> SaveFilesToDisk(IList<IFormFile> files);
     }
 }

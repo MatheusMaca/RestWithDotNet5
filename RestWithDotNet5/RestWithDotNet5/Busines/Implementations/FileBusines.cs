@@ -43,14 +43,21 @@ namespace RestWithDotNet5.Busines.Implementations
             return fileDetail;
         }
 
+        public async Task<List<FileDetailVO>> SaveFilesToDisk(IList<IFormFile> files)
+        {
+            List<FileDetailVO> list = new List<FileDetailVO>();
+            
+            foreach (var file in files)
+            {
+                list.Add(await SaveFileToDisk(file));
+            }
+            
+            return list;
+        }
+
         public byte[] GetFile(string fileName)
         {
             throw new NotImplementedException();
-        }
-
-        public List<FileDetailVO> SaveFilesToDisk(IList<IFormFile> files)
-        {
-            throw new NotImplementedException();
-        }
+        }        
     }
 }
