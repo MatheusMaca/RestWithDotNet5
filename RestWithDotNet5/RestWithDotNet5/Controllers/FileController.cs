@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using RestWithDotNet5.Busines;
 using RestWithDotNet5.Data.VO;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace RestWithDotNet5.Controllers
@@ -41,6 +42,26 @@ namespace RestWithDotNet5.Controllers
         {
             List<FileDetailVO> details = await _fileBusines.SaveFilesToDisk(files);
             return new OkObjectResult(details);
+        }
+
+        [HttpGet("downloadFile/{fileName}")]
+        [ProducesResponseType((200), Type = typeof(byte[]))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [Produces("application/octet-stream")]
+        public async Task<IActionResult> GetFileAsync(string fileName)
+        {
+            byte[] buffer =  _fileBusines.GetFile(fileName);
+
+            if (buffer != null)
+            {
+                HttpContext.Response.ContentType = $"application/{Path.GetExtension(fileName).Replace(".", "")}";
+                HttpContext.Response.Headers.Add("content-length", buffer.Length.ToString());
+                await HttpContext.Response.Body.WriteAsync(buffer, 0, buffer.Length);
+            }
+
+            return new ContentResult();
         }
     }
 }

@@ -57,7 +57,8 @@ namespace RestWithDotNet5.Busines.Implementations
 
         public byte[] GetFile(string fileName)
         {
-            throw new NotImplementedException();
-        }        
+            var filePath = _basePath + fileName;
+            return File.ReadAllBytes(filePath);
+        }
     }
 }
