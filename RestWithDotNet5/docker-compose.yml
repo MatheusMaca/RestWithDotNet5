@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  restwithdotnet5:
+    image: ${DOCKER_REGISTRY-}restwithdotnet5
+    build:
+      context: .
+      dockerfile: RestWithDotNet5/Dockerfile
