@@ -14,7 +14,7 @@ before_deploy:
 deploy:
   provider: script
   script:
-    docker tag rest-with-dot-net-5:latest $DOCKER_USERNAME/rest-with-dot-net-5-db:$TRAVIS_JOB_ID;
+    docker tag rest-with-dot-net-5:latest $DOCKER_USERNAME/rest-with-dot-net-5:$TRAVIS_JOB_ID;
     docker tag rest-with-dot-net-5-db:latest $DOCKER_USERNAME/rest-with-dot-net-5-db:$TRAVIS_JOB_ID;
     docker push $DOCKER_USERNAME/rest-with-dot-net-5:$TRAVIS_JOB_ID;
     docker push $DOCKER_USERNAME/rest-with-dot-net-5-db:$TRAVIS_JOB_ID;
