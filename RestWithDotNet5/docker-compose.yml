@@ -20,7 +20,7 @@ services:
       - udemy-network
 
   rest-with-dot-net-5:
-    image: rest_asp_net_udemy
+    image: rest-with-dot-net-5
     build:
       context: .
       dockerfile: RestWithDotNet5/Dockerfile
@@ -35,5 +35,5 @@ services:
       - udemy-network
 
 networks:
-    udemy-network:
-        driver: bridge
+  udemy-network:
+    driver: bridge

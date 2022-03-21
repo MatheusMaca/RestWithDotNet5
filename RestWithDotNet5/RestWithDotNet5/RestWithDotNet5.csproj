@@ -24,4 +24,6 @@
     <Folder Include="ci\" />
     <Folder Include="UploadDir\" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="..\docker-compose.yml" /></VisualStudio></ProjectExtensions>
 </Project>

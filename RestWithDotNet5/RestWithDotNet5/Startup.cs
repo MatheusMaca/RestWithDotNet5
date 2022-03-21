@@ -94,10 +94,10 @@ namespace RestWithDotNet5
             services.AddControllers();
             var connection = Configuration["MySQLConnection:MySQLConnectionString"];
 
-            if (Environment.IsDevelopment())
-            {
-                MigrateDatabase(connection);
-            }
+            //if (Environment.IsDevelopment())
+            //{
+            //    MigrateDatabase(connection);
+            //}
 
             services.AddMvc(options =>
             {
