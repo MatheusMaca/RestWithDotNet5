@@ -19,7 +19,7 @@ jobs:
             login-server: ${{ secrets.DOCKER_CONTAINER_REGISTRY }}
             
         - name: Build Images
-          working-directory: ./RestWithDotNet5/tree/master/RestWithDotNet5
+          working-directory: ./RestWithDotNet5/RestWithDotNet5
           run: docker-compose build
           
         - name: Push to Azure Container registry
