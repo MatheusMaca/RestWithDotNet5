@@ -134,14 +134,14 @@ namespace RestWithDotNet5
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Documentação Swagger API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Rest API Documentation", Version = "v1" });
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment() || env.IsProduction())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
